@@ -1,0 +1,67 @@
+# tips et cours PHP
+
+**ctrl+k v** *pour ouvrir afficher page markdown*
+
+**Emmet** : [→ documentation](https://docs.emmet.io/cheat-sheet/) 
+.card ↔ ``` <div class="card"></div> ``` 
+
+## Formulaire de contact  
+
+Dans le formulaire, on aura la method et l'url de traitement du formulaire
+
+```html
+<form method="POST" action="submit_contact.php" >
+    ...
+    <button type="submit" class="btn btn-primary">Envoyer</button>
+</form>
+```
+
+Il faut :
+
+- contrôler si l'e-mail passé est bien valide, à l'aide de la fonction   [filter_var](https://www.php.net/manual/fr/filter.examples.validation.php) ;
+
+- vérifier que le message n'est pas vide, à l'aide de la fonction [empty](https://www.php.net/manual/fr/function.empty.php).
+
+- Sécurisez votre code en bloquant l'exécution de code JavaScript
+Pour éviter la faille XSS, il suffit d'utiliser la fonction  **htmlspecialchars**. Pour retirer les balises HTML que le visiteur a tenté d'envoyer plutôt que de les afficher, utiliser la fonction  **strip_tags**.
+
+## Formulaire avec fichier → Cours [openClassRoom](https://openclassrooms.com/fr/courses/918836-concevez-votre-site-web-avec-php-et-mysql/7360266-activez-le-partage-de-fichiers#/id/r-7360356)
+
+Le formulaire aura  **enctype="multipart/form-data"**  en plus :
+
+```html
+<form action="submit_contact.php" method="POST" enctype="multipart/form-data">
+```
+La balise sera : 
+
+```html
+<input type="file" name="nomDuFichier" />
+```
+
+La taille de l'envoi est limitée par PHP. Par défaut, ***impossible d'uploader des fichiers de plus de*** **8 Mo.**
+
+Pour récupérer l'extension du fichier dans une variable :
+
+```php
+<?php
+$fileInfo = pathinfo($_FILES['screenshot']['name']);
+$extension = $fileInfo['extension'];
+?>
+```
+
+**ATTENTION** Lorsqu'on met le script sur Internet à l'aide d'un logiciel FTP, vérifier que le dossier « Uploads » où seront stockéS les fichiers importés sur le serveur, **existe et qu'il a les droits d'écriture**. Pour ce faire, sous FileZilla par exemple, faire un clic droit sur le dossier et choisir « Attributs du fichier ».
+Cela permettra d'éditer les droits du dossier (on parle de CHMOD). **Mettre les droits à 733**, ainsi PHP pourra placer les fichiers téléversés dans ce dossier.
+
+# RESUME : Les formulaires
+
+```
+Les formulaires permettent d'envoyer des fichiers. On retrouve les informations sur les fichiers envoyés dans un array $_FILES . Leur traitement est cependant plus complexe.
+
+Il faudra toujours contrôler les fichiers reçus : leur existence et leur taille qui est soumise à limitation par la configuration de PHP.
+
+Il faudra vérifier leur extension (à l'aide de la fonction pathinfo) et surtout refuser tout fichier PHP qui pourrait par la suite s'exécuter sur votre serveur.
+
+À l'aide de la fonction move_uploaded_file, vous pouvez conserver le fichier téléversé sur votre serveur, mais vérifiez bien que vous avez les droits d'écrire des fichiers d'abord.```
+
+## SESSIONS et COOKIES [→ cours OpenClassRoom](https://openclassrooms.com/fr/courses/918836-concevez-votre-site-web-avec-php-et-mysql/4239476-conservez-des-donnees-grace-aux-sessions-et-aux-cookies)
+

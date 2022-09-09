@@ -1,4 +1,5 @@
 <?php session_start(); ?>
+
 <!-- recipe_form.php -->
 <!DOCTYPE html>
 <html>
@@ -15,32 +16,33 @@
 <body class="d-flex flex-column min-vh-100">
     <div class="container">
 
-    <?php include_once('includes/header.php'); ?>
+    <?php include_once('../includes/header.php'); ?>
         <h1>Quelle recette proposer contenant des oeufs ?</h1>
 
         <?php if(isset($_SESSION['LOGGED_USER'])): ?>
             
-            <form method="POST" action="submit_recipe.php" enctype="multipart/form-data">
+            <form method="POST" action="post_create.php" enctype="multipart/form-data">
                 <div class="mb-3">
-                    <label for="titleRecipe" class="form-label">Titre</label>
-                    <input type="txt" class="form-control" id="titleRecipe" name="titleRecipe" placeholder="Titre de ma recette">
+                    <label for="title" class="form-label">Titre de la recette</label>
+                    <input type="txt" class="form-control" id="title" name="title" placeholder="Titre de ma recette" aria-describedby="title-help">
+                    <div id="title-help" class="form-text">Choisissez un titre percutant !</div>
                 </div>
                 <div class="mb-3">
                     <label for="recipe" class="form-label">Les étapes de la recette</label>
-                    <input type="txt" class="form-control" id="recipe" name="recipe" placeholder="Je développe ici toutes les étapes de ma recette">
+                    <input type="txt" class="form-control" id="recipe" name="recipe" placeholder="Seulement du contenu vous appartenant ou libre de droits.">
                 </div>
-                <input type="hidden" class="form-control" id="author" name="author" value=<?php echo $_SESSION['LOGGED_USER'] ?>>
+                
                 <button type="submit" class="btn btn-primary">Je propose ma recette</button>
             </form>
         
         <?php else: ?>
         <div>Pour proposer une recette, vous devez être inscrit et connecté</div>
-        <?php include_once('includes/login.php'); ?>
+        <?php include_once('../includes/login.php'); ?>
         <?php endif; ?>
 
         <br />
     </div>
 
-    <?php include_once('includes/footer.php'); ?>
+    <?php include_once('../includes/footer.php'); ?>
 </body>
 </html>

@@ -1,18 +1,33 @@
+
+<!-- post_create.php -->
 <?php session_start(); 
-if (!isset($_POST['author'])) 
-{
-    echo('Vous devez être enregistré pour proposer une recette.');
-    return;
-}
-// submit_recipe.php
-if (!isset($_POST['titleRecipe']) || !isset($_POST['recipe']))
+
+include_once('../config/mysql.php');
+include_once('../variables.php');
+include_once('../config/user.php');
+
+if (!isset($_POST['title']) || !isset($_POST['recipe']))
 {
 	echo('Il faut un titre et les étapes décrites pour soumettre votre recette.');
     return;
 }	
 
-$title = $_POST['titleRecipe'];
+$title = $_POST['title'];
 $recipe = $_POST['recipe'];
+
+// Ecriture de la requête
+$sqlQuery = 'INSERT INTO recipes(title, recipe, author, is_enabled) VALUES (:title, :recipe, :author, :is_enabled)';
+
+// Préparation
+$insertRecipe = $mysqlClient->prepare($sqlQuery);
+
+// Exécution ! La recette sera en base de données
+$insertRecipe->execute([
+    'title' => $title,
+    'recipe' => $recipe,
+    'author' => $_SESSION['LOGGED_USER'],
+    'is_enabled' => 1, // 1 = true, 0 = false
+]);
 
 ?>
 
@@ -29,18 +44,19 @@ $recipe = $_POST['recipe'];
     <body>
         <div class="container">
     
-        <?php include_once('includes/header.php'); ?>
+        <?php include_once('../includes/header.php'); ?>
             <h1>Recette bien reçue !</h1>
             
             <div class="card">
                 
                 <div class="card-body">
                     <h5 class="card-title">Rappel de votre recette</h5>
-                    <p class="card-text"><b>Titre</b> : <?php echo($title); ?></p>
+                    <p class="card-text"><b>Titre</b> : <?php echo $title; ?></p>
+                    <p class="card-text"><b>Email</b> : <?php echo $loggedUser['email']; ?></p>
                     <p class="card-text"><b>Etapes</b> : <?php echo strip_tags($recipe); ?></p>
                 </div>
             </div>
         </div>
-        <?php include_once('includes/footer.php'); ?>   
+
     </body>
 </html>

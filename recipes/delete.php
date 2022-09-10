@@ -20,7 +20,7 @@ include_once('../variables.php');
 <body class="d-flex flex-column min-vh-100">
     <div class="container">
 
-    <?php include_once($rootPath.'/header.php'); ?>
+    <?php include_once($rootPath.'includes/header.php'); ?>
         <h1>Supprimer la recette ?</h1>
         <form action="<?php echo $rootUrl . 'recipes/post_delete.php'; ?>" method="POST">
             <div class="mb-3 visually-hidden">
@@ -33,6 +33,6 @@ include_once('../variables.php');
         <br />
     </div>
 
-    <?php include_once($rootPath.'/footer.php'); ?>
+    <?php include_once($rootPath.'includes/footer.php'); ?>
 </body>
 </html>

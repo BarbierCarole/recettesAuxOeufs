@@ -23,5 +23,5 @@ if (isset($_COOKIE['LOGGED_USER']) || isset($_SESSION['LOGGED_USER'])) {
 }
 
 
-$rootPath = $_SERVER['DOCUMENT_ROOT']. '/P4C4/';
-$rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/P4C4/';
+$rootPath = $_SERVER['DOCUMENT_ROOT']. '/recettesAuxOeufs/';
+$rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/recettesAuxOeufs/';

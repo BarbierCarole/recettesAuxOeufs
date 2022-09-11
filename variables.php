@@ -6,6 +6,7 @@ $usersStatement->execute();
 $users = $usersStatement->fetchAll();
 
 $recipesStatement = $mysqlClient->prepare('SELECT * FROM recipes WHERE is_enabled is TRUE');
+
 $recipesStatement->execute();
 $recipes = $recipesStatement->fetchAll();
 
@@ -25,3 +26,10 @@ if (isset($_COOKIE['LOGGED_USER']) || isset($_SESSION['LOGGED_USER'])) {
 
 $rootPath = $_SERVER['DOCUMENT_ROOT']. '/recettesAuxOeufs/';
 $rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/recettesAuxOeufs/';
+
+// pour afficher les commentaires de chaque recette
+$commentStatement = $mysqlClient->prepare('SELECT r.recipe_id, comment FROM recipes r
+INNER JOIN  comments c ON r.recipe_id = c.recipe_id 
+INNER JOIN users u ON c.user_id = u.user_id 
+WHERE is_enabled is TRUE
+AND WHERE r.recipe_id = 1');

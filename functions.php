@@ -1,19 +1,19 @@
 <?php
 
-function display_recipe(array $recipe) : string
-{
-    $recipe_content = '';
+// function display_recipe(array $recipe) : string
+// {
+//     $recipe_content = '';
 
-    if ($recipe['is_enabled']) {
-        $recipe_content = '<article>';
-        $recipe_content .= '<h3>' . $recipe['title'] . '</h3>';
-        $recipe_content .= '<div>' . $recipe['recipe'] . '</div>';
-        $recipe_content .= '<i>' . $recipe['author'] . '</i>';
-        $recipe_content .= '</article>';
-    }
+//     if ($recipe['is_enabled']) {
+//         $recipe_content = '<article>';
+//         $recipe_content .= '<h3>' . $recipe['title'] . '</h3>';
+//         $recipe_content .= '<div>' . $recipe['recipe'] . '</div>';
+//         $recipe_content .= '<i>' . $recipe['author'] . '</i>';
+//         $recipe_content .= '</article>';
+//     }
     
-    return $recipe_content;
-}
+//     return $recipe_content;
+// }
 
 function display_author(string $authorEmail, array $users) : string
 {
@@ -41,3 +41,20 @@ function get_recipes(array $recipes, int $limit) : array
 
     return $valid_recipes;
 }
+
+// function get_comments(array $comments, int $limit) :  array
+// {
+//     $valid_comments = [];
+//     $counter = 0;
+
+//     foreach($comments as $comment) {
+//         if ($counter == $limit) {
+//             return $valid_comments;
+//         }
+
+//         $valid_comments[] = $comment;
+//         $counter++;
+//     }
+
+//     return $valid_comments;
+// }

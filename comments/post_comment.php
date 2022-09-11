@@ -14,9 +14,14 @@ $user_email = $_POST['user_email'];
 $recipe_id = $_POST['recipe_id'];
 $comment = $_POST['comment'];
 
-$createComment = $mysqlClient -> prepare('INSERT INTO `comments` (user_id,recipe_id, comment) VALUES ((SELECT user_id FROM users WHERE email like $user_email  ),:recipe_id, :comment) ');
+echo $user_email ;
+
+$createComment = $mysqlClient -> prepare('INSERT INTO `comments` (user_id,recipe_id, comment) VALUES ((SELECT user_id FROM users WHERE email like :email),:recipe_id, :comment) ');
 
 $createComment->execute([
     'recipe_id' => $recipe_id, 
     'comment' => $comment,
+    'email' => $user_email,
 ]);
+
+header('Location: '.$rootUrl.'home.php');

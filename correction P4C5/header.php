@@ -1,13 +1,12 @@
-
 <?php
-
-$rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/recettesAuxOeufs/';
- 
+    include_once('config/mysql.php');
+    include_once('variables.php');
+    include_once('functions.php');  
 ?>
-<!-- header.php -->
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="<?php echo($rootUrl). 'home.php'; ?>">Site de recettes</a>
+    <a class="navbar-brand" href="<?php echo($rootUrl). 'home.php'; ?>">Site de Recettes</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -17,11 +16,13 @@ $rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HT
           <a class="nav-link active" aria-current="page" href="<?php echo($rootUrl). 'home.php'; ?>">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="recipes/create.php">Proposer une recette !</a>
+          <a class="nav-link" href="<?php echo($rootUrl). 'contact.php'; ?>">Contact</a>
         </li>
+        <?php if(isset($loggedUser)) : ?>
         <li class="nav-item">
-          <a class="nav-link" href="contact.php">Contact</a>
+          <a class="nav-link" href="<?php echo($rootUrl). 'recipes/create.php'; ?>">Ajoutez une recette !</a>
         </li>
+        <?php endif; ?>
       </ul>
     </div>
   </div>

@@ -42,19 +42,19 @@ function get_recipes(array $recipes, int $limit) : array
     return $valid_recipes;
 }
 
-// function get_comments(array $comments, int $limit) :  array
-// {
-//     $valid_comments = [];
-//     $counter = 0;
+function get_comments(array $comments, int $limit) :  array
+{
+    $valid_comments = [];
+    $counter = 0;
 
-//     foreach($comments as $comment) {
-//         if ($counter == $limit) {
-//             return $valid_comments;
-//         }
+    foreach($comments as $comment) {
+        if ($counter == $limit) {
+            return $valid_comments;
+        }
 
-//         $valid_comments[] = $comment;
-//         $counter++;
-//     }
+        $valid_comments[] = $comment;
+        $counter++;
+    }
 
-//     return $valid_comments;
-// }
+    return $valid_comments;
+}

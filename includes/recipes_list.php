@@ -13,7 +13,9 @@
             <li class="list-group-item"><a class="link-danger" href="./comments/comment.php?recipe_id=<?php echo($recipe['recipe_id']); ?>&user_email=<?php echo $loggedUser['email']; ?>">Ajouter un commentaire</a></li>
         </ul>
         
-        
+        <?php foreach(get_comments($comments, $limit) as $comment) : ?>
+            <div><?php echo($comment['comment']); ?></div>          
+        <?php endforeach ?>
         
         
     </article>
